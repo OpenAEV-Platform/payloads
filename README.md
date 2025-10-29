@@ -1,14 +1,14 @@
-# OpenBAS Payloads Repository
+# OpenAEV Payloads Repository
 
 ## Purpose
 
-This repository hosts default payloads collected by the OpenBAS datasets collector. 
+This repository hosts default payloads collected by the OpenAEV datasets collector. 
 
 ## How to contribute to new payloads
 
-### 1. Create your payload within OpenBAS
+### 1. Create your payload within OpenAEV
 
-The first step is to create the payload in an OpenBAS Platform. Be sure to fill the description, associate with relevant MITRE ATT&CK TTPs and put any relevant tagging.
+The first step is to create the payload in an OpenAEV Platform. Be sure to fill the description, associate with relevant MITRE ATT&CK TTPs and put any relevant tagging.
 
 ![Create Payload](./.github/img/create-payload.png "Create Payload")
 
@@ -52,9 +52,9 @@ You can just select the payload folder and create a ZIP file.
 
 ![Create Archive](./.github/img/create-archive.png "Create Archive")
 
-### 2. Import the payload in OpenBAS
+### 2. Import the payload in OpenAEV
 
-Then, just import the payload in OpenBAS.
+Then, just import the payload in OpenAEV.
 
 ![Import Payload](./.github/img/import-payload.png "Import Payload")
 
@@ -64,6 +64,6 @@ Then, test the payload and validate it works before marging the pull request.
 
 ## About
 
-OpenBAS is a product designed and developed by the company [Filigran](https://filigran.io).
+OpenAEV is a product designed and developed by the company [Filigran](https://filigran.io).
 
-<a href="https://filigran.io" alt="Filigran"><img src="https://github.com/OpenBAS-Platform/openbas/raw/master/.github/img/logo_filigran.png" width="300" /></a>
+<a href="https://filigran.io" alt="Filigran"><img src="https://github.com/OpenAEV-Platform/openaev/raw/master/.github/img/logo_filigran.png" width="300" /></a>
