@@ -36,7 +36,13 @@
     "payload_created_at": "2025-06-20T09:48:04.165921Z",
     "payload_updated_at": "2025-07-28T04:00:51.234396Z",
     "command_executor": "bash",
-    "command_content": "password=$(openssl passwd -1 art)\n([ \"$(uname)\" = 'Linux' ] && useradd --shell /bin/bash --create-home --password $password art) || (pw useradd art -g wheel -s /bin/sh && (echo $password | pw mod user testuser1 -h 0))\nsu art -c \"whoami; exit\"\n"
+    "command_content": "password=$(openssl passwd -1 art)\n([ \"$(uname)\" = 'Linux' ] && useradd --shell /bin/bash --create-home --password $password art) || (pw useradd art -g wheel -s /bin/sh && (echo $password | pw mod user testuser1 -h 0))\nsu art -c \"whoami; exit\"\n",
+    "payload_domains": [
+      {
+        "domain_name": "Endpoint",
+        "domain_color": "#389CFF"
+      }
+    ]
   },
   "payload_tags": [],
   "payload_attack_patterns": [

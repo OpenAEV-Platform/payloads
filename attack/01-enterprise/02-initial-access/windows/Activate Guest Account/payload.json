@@ -43,7 +43,13 @@
     "payload_updated_at": "2025-06-29T12:34:33.717173Z",
     "payload_output_parsers": [],
     "command_executor": "cmd",
-    "command_content": "net user #{guest_user} /active:yes\n"
+    "command_content": "net user #{guest_user} /active:yes\n",
+    "payload_domains": [
+      {
+        "domain_name": "Endpoint",
+        "domain_color": "#389CFF"
+      }
+    ]
   },
   "payload_tags": [],
   "payload_attack_patterns": [

