@@ -1,0 +1,2 @@
+json-api-doc >= 0.15.0
+orjson >= 3.10,<4

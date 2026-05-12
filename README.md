@@ -8,7 +8,7 @@ This repository hosts default payloads collected by the OpenAEV datasets collect
 
 ### 1. Create your payload within OpenAEV
 
-The first step is to create the payload in an OpenAEV Platform. Be sure to fill the description, associate with relevant MITRE ATT&CK TTPs and put any relevant tagging.
+The first step is to create the payload in an OpenAEV Platform. Be sure to fill the description, associate it with relevant MITRE ATT&CK TTPs and put any relevant tagging.
 
 ![Create Payload](./.github/img/create-payload.png "Create Payload")
 
@@ -34,13 +34,14 @@ In the example above, just take `Activate Guest Account.zip` and extract it to c
 
 ### 5. Verify directory structure and generate manifest
 
-In a payload directory, you've only the `payload.json` file and an optional `attachments.zip` containing a potential malicious file (encrypted archive). *Do not unzip this file, let it as it is*.
+In a payload directory, you should only have the `payload.json` file and an optional `attachments.zip` containing a potential malicious file (encrypted archive). *Do not unzip this file, let it as it is*.
 
 ![File Structure](./.github/img/file-structure.png "File Structure")
 
-Before opening your pull request, just run the Python script `scripts/generate_manifest.py`.
+Before opening your pull request, the JSON file(s) must be passed through our convenience script. You'll first need to install the requirements `python -m pip install -r scripts/requirements.txt`, then run the Python script `scripts/generate_manifest.py` (minimum Python version: 3.12).
 
 ```bash
+$ python3 -m pip install -r scripts/requirements.txt
 $ python3 scripts/generate_manifest.py
 ```
 
